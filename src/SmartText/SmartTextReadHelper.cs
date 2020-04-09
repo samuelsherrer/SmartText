@@ -8,9 +8,16 @@ using System.Threading.Tasks;
 
 namespace SmartText
 {
-    public class SmartTextReadHelper : ISmartTextReadHelper
+    internal class SmartTextReadHelper : ISmartTextReader
     {
-        public T ReadLine<T>(List<Property> properties, string textLine, ref T result)
+        private readonly IEnumerable<Property> properties;
+
+        public SmartTextReadHelper(IEnumerable<Property> properties)
+        {
+            this.properties = properties;
+        }
+
+        public T ReadContent<T>(string textLine, ref T result)
         {
             foreach (var property in properties)
             {
@@ -25,6 +32,13 @@ namespace SmartText
                 fieldPropertyInfo?.SetValue(result, Convert.ChangeType(value, fieldPropertyInfo.PropertyType), null);
             }
 
+            return result;
+        }
+
+        public T ReadContent<T>(string textLine) where T : class, new()
+        {
+            var result = new T();
+            ReadContent(textLine, ref result);
             return result;
         }
     }

@@ -5,12 +5,20 @@ using System.Text;
 
 namespace SmartText
 {
-    public class SmartTextWriteHelper : ISmartTextWriteHelper
+    internal class SmartTextStringWriter : ISmartTextWriter
     {
         private readonly StringBuilder _builder;
-        public SmartTextWriteHelper()
+        private readonly IEnumerable<Property> properties;
+
+        public SmartTextStringWriter()
         {
             _builder = new StringBuilder();
+        }
+
+        public SmartTextStringWriter(StringBuilder builder, IEnumerable<Property> properties)
+        {
+            _builder = builder;
+            this.properties = properties;
         }
 
         /// <summary>
@@ -19,9 +27,14 @@ namespace SmartText
         /// <param name="properties"></param>
         /// <param name="item"></param>
         /// <returns></returns>
-        public void CreateLine(List<Property> properties, object item)
+        public void CreateLine(object item)
         {
-            string line = String.Empty;
+            CreateLine<object>(item);
+        }
+
+        public void CreateLine<T>(T item)
+        {
+            string line = string.Empty;
 
             foreach (var property in properties.OrderBy(a => a.Order))
             {

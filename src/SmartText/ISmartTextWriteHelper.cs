@@ -4,8 +4,11 @@ using System.Text;
 
 namespace SmartText
 {
-    public interface ISmartTextWriteHelper
+    public interface ISmartTextWriter
     {
-        void CreateLine(List<Property> properties, object item);
+        void CreateLine(object item);
+        void CreateLine();
+        void CreateLine<T>(T item);
+        //void CreateLine(List<Property> properties, object item);
     }
 }

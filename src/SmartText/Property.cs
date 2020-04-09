@@ -31,13 +31,17 @@ namespace SmartText
         }
 
         public string Name { get; private set; }
+
         public int Order { get; private set; }
+
         public Padding Padding { get; private set; }
+
         private int _begin 
         { 
             get { return this.Begin; } 
             set { this.Begin = value - 1; } 
         }
+
         public int Begin { get; private set; }
 
         private int _end 
