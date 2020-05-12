@@ -49,6 +49,7 @@ namespace SmartText
             get { return this.End; } 
             set { this.End = value - 1; } 
         }
+
         public int End { get; private set; }
 
         public char PaddingChar { get; private set; }

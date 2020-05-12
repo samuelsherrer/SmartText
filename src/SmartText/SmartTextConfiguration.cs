@@ -6,7 +6,10 @@ namespace SmartText
 {
     public class Configuration
     {
-        public List<Property> Properties { get; set; }
+        public IEnumerable<Section> Sections { get; set; }
 
+        public string FilePath { get; set; }
+
+        public bool AutoLoadFile { get; set; }
     }
 }

@@ -8,13 +8,24 @@ using System.Threading.Tasks;
 
 namespace SmartText
 {
-    internal class SmartTextReadHelper : ISmartTextReader
+    internal class SmartTextReadHelper<TSection> : ISectionReader<TSection>
+        where TSection : class, new()
     {
         private readonly IEnumerable<Property> properties;
 
         public SmartTextReadHelper(IEnumerable<Property> properties)
         {
             this.properties = properties;
+        }
+
+        public IEnumerable<T> ReadSection<T>()
+        {
+            throw new NotImplementedException();
+        }
+
+        public T Read<T>(string content)
+        {
+            throw new NotImplementedException();
         }
 
         public T ReadContent<T>(string textLine, ref T result)
@@ -40,6 +51,23 @@ namespace SmartText
             var result = new T();
             ReadContent(textLine, ref result);
             return result;
+        }
+
+
+
+        public bool TryReadContent(string textLine, out TSection result)
+        {
+            throw new NotImplementedException();
+        }
+
+        public TSection ReadContent(string textLine)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IEnumerable<TSection> ReadSection()
+        {
+            throw new NotImplementedException();
         }
     }
 }

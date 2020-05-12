@@ -4,10 +4,12 @@ using System.Text;
 
 namespace SmartText
 {
-    public interface ISmartTextReader
+    public interface ISectionReader<T> where T : class, new()
     {
-        T ReadContent<T>(string textLine, ref T result);
-        T ReadContent<T>(string textLine) where T : class, new();
-        //T ReadLine<T>(List<Property> properties, string textLine, ref T result);
+        bool TryReadContent(string textLine, out T result);
+
+        T ReadContent(string textLine);
+
+        IEnumerable<T> ReadSection();
     }
 }
