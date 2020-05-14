@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
-using System.Text;
+using System.Threading.Tasks;
 
 namespace SmartText
 {
@@ -10,23 +9,33 @@ namespace SmartText
     {
         public Configuration Configuration { get; }
 
-        private string[] _data = null; //readonly?
+        private string[] _data = null;
 
-        private readonly IContentReader _contentReader = new FileContentReader();
+        public IReadOnlyCollection<string> Content => Array.AsReadOnly(_data);
+
+        private readonly IContentReader _contentReader;
 
         public SmartText(Configuration configuration)
         {
             Configuration = configuration ?? throw new ArgumentNullException(nameof(configuration));
+            _ = Configuration.ContentReader ?? throw new ArgumentNullException(nameof(Configuration.ContentReader));
+
+            _contentReader = Configuration.ContentReader;
 
             if (Configuration.AutoLoadFile)
             {
-                _data = _contentReader.ReadAllLines(Configuration.FilePath);
+                LoadContent();
             }
         }
 
         public void LoadContent()
         {
             _data = _contentReader.ReadAllLines(Configuration.FilePath);
+        }
+
+        public async Task LoadContentAsync()
+        {
+            _data = await _contentReader.ReadAllLinesAsync(Configuration.FilePath);
         }
 
         public ISectionReader<TSection> Reader<TSection>() where TSection : class, new()
@@ -47,7 +56,7 @@ namespace SmartText
                 throw new Exception("Section not found");
             }
 
-            return new SmartTextReadHelper<TSection>(section.Properties);
+            return new SectionReader<TSection>(section, _data.ToList());
         }
     }
 }

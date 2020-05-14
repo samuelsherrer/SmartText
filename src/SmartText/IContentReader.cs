@@ -1,11 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Threading.Tasks;
 
 namespace SmartText
 {
     public interface IContentReader
     {
         string[] ReadAllLines(string filePath);
+
+        Task<string[]> ReadAllLinesAsync(string filePath);
     }
 }
