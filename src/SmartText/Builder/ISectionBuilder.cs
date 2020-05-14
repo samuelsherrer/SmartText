@@ -1,16 +1,7 @@
-﻿using System.Collections.Generic;
-
-namespace SmartText.Builder
+﻿namespace SmartText.Builder
 {
-    public interface ISectionBuilder
+    public interface ISectionBuilder<T> where T : class, new()
     {
         Section Section { get; }
-    }
-
-    public interface ISectionBuilder<TSection> : ISectionBuilder
-        where TSection : class, new()
-    {
-        List<Property> Properties { get; }
-
     }
 }

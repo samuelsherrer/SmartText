@@ -1,26 +1,17 @@
 ﻿using System;
-using System.Collections.Generic;
 
 namespace SmartText.Builder
 {
-    public class SectionBuilder<TSection> : ISectionBuilder<TSection>
-        where TSection : class, new()
+    public class SectionBuilder<T> : ISectionBuilder<T>
+        where T : class, new()
     {
-    //    public List<Property> Properties { get; }
+        public SectionBuilder(Section section)
+        {
+            Section = section ?? throw new ArgumentNullException(nameof(section));
+        }
 
-       public Section Section => throw new NotImplementedException();
+        public Section Section { get; }
 
-    //    public SectionBuilder(List<Property> properties = null)
-    //    {
-    //        Properties = properties ?? new List<Property>();
-    //    }
-       
-    //    public Section Build()
-    //    {
-    //        return new Section(
-    //            dataType: typeof(TSection),
-    //            properties: Properties);
-    //    }
-
+        public Section Build() => Section;
     }
 }
