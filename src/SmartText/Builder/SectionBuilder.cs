@@ -2,7 +2,7 @@
 
 namespace SmartText.Builder
 {
-    public class SectionBuilder<T> : ISectionBuilder<T>
+    internal class SectionBuilder<T> : ISectionBuilder<T>
         where T : class, new()
     {
         public SectionBuilder(Section section)

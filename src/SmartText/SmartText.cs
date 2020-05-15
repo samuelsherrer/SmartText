@@ -45,10 +45,6 @@ namespace SmartText
                 LoadContent();
             }
 
-            /*
-             * obter a secao solicitada
-             * instanciar um reader daquela secao, passando a lista de propriedades no construtor
-             */
             var section = Configuration.Sections.FirstOrDefault(p => p.DataType == typeof(TSection));
 
             if (section is null)
@@ -57,6 +53,18 @@ namespace SmartText
             }
 
             return new SectionReader<TSection>(section, _data.ToList());
+        }
+
+        public ISectionWriter<TSection> Writer<TSection>()
+        {
+            var section = Configuration.Sections.FirstOrDefault(p => p.DataType == typeof(TSection));
+
+            if (section is null)
+            {
+                throw new Exception("Section not found");
+            }
+
+            return new SectionWriter<TSection>(section);
         }
     }
 }

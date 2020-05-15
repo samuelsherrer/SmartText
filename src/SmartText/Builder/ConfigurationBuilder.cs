@@ -1,9 +1,11 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace SmartText.Builder
 {
     public class ConfigurationBuilder : IConfigurationBuilder
     {
+        
         private ConfigurationBuilder(string filePath,
                                     bool autoLoadFile,
                                     IContentReader contentReader,
@@ -42,6 +44,16 @@ namespace SmartText.Builder
                 FilePath = FilePath,
                 Sections = Sections
             };
+        }
+
+        public void SetSectionReader<T>(Func<SectionReaderContext, ISectionReader<T>> factory) where T : class, new()
+        {
+            
+        }
+
+        public void SetSectionWriter<T>(Func<SectionWriterContext, ISectionWriter<T>> factory)
+        {
+            
         }
     }
 }

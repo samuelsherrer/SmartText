@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace SmartText
 {
-    public class ContentIterable : IEnumerable<string>
+    internal class ContentIterable : IEnumerable<string>
     {
         private readonly IEnumerable<string> _content;
         private readonly int? _start;
