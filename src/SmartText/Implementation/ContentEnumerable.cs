@@ -2,15 +2,15 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace SmartText
+namespace SmartText.Implementation
 {
-    internal class ContentIterable : IEnumerable<string>
+    internal class ContentEnumerable : IEnumerable<string>
     {
         private readonly IEnumerable<string> _content;
         private readonly int? _start;
         private readonly int? _end;
 
-        public ContentIterable(IEnumerable<string> content, int? start, int? end)
+        public ContentEnumerable(IEnumerable<string> content, int? start, int? end)
         {
             _content = content;
             _start = start;

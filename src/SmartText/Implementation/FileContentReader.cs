@@ -1,7 +1,7 @@
 ﻿using System.IO;
 using System.Threading.Tasks;
 
-namespace SmartText
+namespace SmartText.Implementation
 {
     internal class FileContentReader : IContentReader
     {

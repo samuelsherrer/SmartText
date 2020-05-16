@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SmartText
+namespace SmartText.Implementation
 {
     internal class SectionWriter<T> : ISectionWriter<T>
     {

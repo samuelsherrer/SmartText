@@ -12,9 +12,5 @@ namespace SmartText.Builder
         bool AutoLoadFile { get; set; }
 
         IContentReader ContentReader { get; set; }
-
-        void SetSectionReader<T>(Func<SectionReaderContext, ISectionReader<T>> factory) where T : class, new();
-
-        void SetSectionWriter<T>(Func<SectionWriterContext, ISectionWriter<T>> factory);
     }
 }

@@ -1,4 +1,4 @@
-﻿namespace SmartText
+﻿namespace SmartText.Builder
 {
     public interface IBuildable<T>
     {

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace SmartText
+namespace SmartText.Implementation
 {
     internal class SectionReader<TSection> : ISectionReader<TSection>
         where TSection : class, new()
@@ -17,12 +17,12 @@ namespace SmartText
             _section = section ?? throw new ArgumentNullException(nameof(section));
             _content = content ?? throw new ArgumentNullException(nameof(content));
         }
-        
+
         public IEnumerable<TSection> ReadSection()
         {
             var result = new List<TSection>();
 
-            var lines = new ContentIterable(_content, _section.StartLine, _section.EndLine);
+            var lines = new ContentEnumerable(_content, _section.StartLine, _section.EndLine);
 
             foreach (var line in lines)
             {
@@ -31,7 +31,7 @@ namespace SmartText
                     result.Add(section);
                 }
             }
-            
+
             return result;
         }
 

@@ -1,4 +1,4 @@
-﻿using System;
+﻿using SmartText.Implementation;
 using System.Collections.Generic;
 
 namespace SmartText
