@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace SmartText
+﻿namespace SmartText
 {
     public class Property
     {
@@ -31,20 +27,25 @@ namespace SmartText
         }
 
         public string Name { get; private set; }
+
         public int Order { get; private set; }
+
         public Padding Padding { get; private set; }
-        private int _begin 
-        { 
-            get { return this.Begin; } 
-            set { this.Begin = value - 1; } 
+
+        private int _begin
+        {
+            get { return this.Begin; }
+            set { this.Begin = value - 1; }
         }
+
         public int Begin { get; private set; }
 
-        private int _end 
-        { 
-            get { return this.End; } 
-            set { this.End = value - 1; } 
+        private int _end
+        {
+            get { return this.End; }
+            set { this.End = value - 1; }
         }
+
         public int End { get; private set; }
 
         public char PaddingChar { get; private set; }
