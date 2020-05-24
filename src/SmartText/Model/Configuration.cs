@@ -10,7 +10,6 @@ namespace SmartText
             Sections = new List<Section>();
             FilePath = string.Empty;
             AutoLoadFile = false;
-            ContentReader = new FileContentReader();
         }
 
         public IEnumerable<Section> Sections { get; set; }

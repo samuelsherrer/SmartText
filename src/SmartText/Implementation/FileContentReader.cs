@@ -5,11 +5,15 @@ namespace SmartText.Implementation
 {
     internal class FileContentReader : IContentReader
     {
-        public string[] ReadAllLines(string filePath) => File.ReadAllLines(filePath);
+        private readonly string _filePath;
 
-        public Task<string[]> ReadAllLinesAsync(string filePath)
+        public FileContentReader(string filePath)
         {
-            return Task.FromResult(File.ReadAllLines(filePath));
+            _filePath = filePath ?? throw new System.ArgumentNullException(nameof(filePath));
         }
+
+        public string[] ReadAllLines() => File.ReadAllLines(_filePath);
+
+        public Task<string[]> ReadAllLinesAsync() => Task.FromResult(File.ReadAllLines(_filePath));
     }
 }
