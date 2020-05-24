@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SmartText.Implementation;
+using System;
 
 namespace SmartText.Builder
 {
@@ -18,7 +19,7 @@ namespace SmartText.Builder
 
             builder.FilePath = filePath;
 
-            return builder;
+            return UseFileReader(builder, () => new FileContentReader(filePath));
         }
 
         public static IConfigurationBuilder AutoLoadFile(this IConfigurationBuilder builder, bool autoLoad = false)
@@ -35,17 +36,33 @@ namespace SmartText.Builder
 
         public static IConfigurationBuilder UseFileReader(this IConfigurationBuilder builder, IContentReader reader)
         {
-            if (builder is null)
-            {
-                throw new ArgumentNullException(nameof(builder));
-            }
-
             if (reader is null)
             {
                 throw new ArgumentNullException(nameof(reader));
             }
 
-            builder.ContentReader = reader;
+            return UseFileReader(builder, () => reader);
+        }
+
+        public static IConfigurationBuilder UseFileReader<T>(this IConfigurationBuilder builder, T reader)
+             where T : IContentReader
+        {
+            return UseFileReader(builder, () => reader);
+        }
+
+        public static IConfigurationBuilder UseFileReader(this IConfigurationBuilder builder, Func<IContentReader> readerFactory)
+        {
+            if (builder is null)
+            {
+                throw new ArgumentNullException(nameof(builder));
+            }
+
+            if (readerFactory is null)
+            {
+                throw new ArgumentNullException(nameof(readerFactory));
+            }
+
+            builder.ContentReaderFactory = readerFactory;
 
             return builder;
         }

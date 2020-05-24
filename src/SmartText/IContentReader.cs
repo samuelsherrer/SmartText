@@ -4,8 +4,8 @@ namespace SmartText
 {
     public interface IContentReader
     {
-        string[] ReadAllLines(string filePath);
+        string[] ReadAllLines();
 
-        Task<string[]> ReadAllLinesAsync(string filePath);
+        Task<string[]> ReadAllLinesAsync();
     }
 }
