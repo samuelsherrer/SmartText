@@ -39,7 +39,7 @@ namespace SmartText
             _data = await _contentReader.ReadAllLinesAsync(Configuration.FilePath);
         }
 
-        public ISectionReader<TSection> Reader<TSection>() where TSection : class, new()
+        public ISectionReader<TSection> Reader<TSection>(Func<string, bool> lineReadingCondition) where TSection : class, new()
         {
             if (_data is null)
             {
@@ -53,7 +53,13 @@ namespace SmartText
                 throw new Exception("Section not found");
             }
 
-            return new SectionReader<TSection>(section, _data.ToList());
+            return new SectionReader<TSection>(section, _data.Where(lineReadingCondition).ToList());
+        }
+
+        public ISectionReader<TSection> Reader<TSection>() where TSection : class, new()
+        {
+            return this.Reader<TSection>(x => true);
+
         }
 
         public ISectionWriter<TSection> Writer<TSection>()

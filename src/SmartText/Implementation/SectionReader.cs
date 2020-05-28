@@ -6,7 +6,7 @@ namespace SmartText.Implementation
 {
     internal class SectionReader<TSection> : ISectionReader<TSection>
         where TSection : class, new()
-    {
+        {
         private readonly Section _section;
         private readonly IReadOnlyList<string> _content;
 
@@ -50,7 +50,7 @@ namespace SmartText.Implementation
                 return true;
             }
             catch (Exception ex) // TODO: Remover the exception variable
-            {
+            {   
                 result = default;
                 return false;
             }
@@ -67,16 +67,18 @@ namespace SmartText.Implementation
 
             foreach (var property in Properties.OrderBy(p => p.Order))
             {
-                var value = textLine.Substring(property.Begin, property.Space);
+                if (textLine.Length > property.End) {
+                    var value = textLine.Substring(property.Begin, property.Space);
 
-                if (property.Name is null)
-                    continue;
+                    if (property.Name is null)
+                        continue;
 
-                var fieldPropertyInfo = result.GetType()
-                    .GetProperties()
-                    .FirstOrDefault(f => f.Name.ToLower() == property.Name.ToLower());
+                    var fieldPropertyInfo = result.GetType()
+                        .GetProperties()
+                        .FirstOrDefault(f => f.Name.ToLower() == property.Name.ToLower());
 
-                fieldPropertyInfo?.SetValue(result, Convert.ChangeType(value, fieldPropertyInfo.PropertyType), null);
+                    fieldPropertyInfo?.SetValue(result, Convert.ChangeType(value, fieldPropertyInfo.PropertyType), null);
+                }
             }
 
             return result;
