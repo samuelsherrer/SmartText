@@ -131,12 +131,12 @@ namespace SmartText.Tests
             return resultado;
         }
 
-        public string[] ReadAllLines(string filePath)
+        public string[] ReadAllLines()
         {
             return ReadFromMemoryStream();
         }
 
-        public Task<string[]> ReadAllLinesAsync(string filePath)
+        public Task<string[]> ReadAllLinesAsync()
         {
             return new Task<string[]>(() => ReadFromMemoryStream());
         }
