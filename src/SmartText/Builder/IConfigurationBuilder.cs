@@ -11,6 +11,6 @@ namespace SmartText.Builder
 
         bool AutoLoadFile { get; set; }
 
-        IContentReader ContentReader { get; set; }
+        Func<IContentReader> ContentReaderFactory { get; set; }
     }
 }

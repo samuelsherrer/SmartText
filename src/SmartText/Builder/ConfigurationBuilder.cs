@@ -1,4 +1,5 @@
 ﻿using SmartText.Implementation;
+using System;
 using System.Collections.Generic;
 
 namespace SmartText.Builder
@@ -8,12 +9,10 @@ namespace SmartText.Builder
 
         private ConfigurationBuilder(string filePath,
                                     bool autoLoadFile,
-                                    IContentReader contentReader,
                                     List<Section> sections)
         {
             FilePath = filePath;
             AutoLoadFile = autoLoadFile;
-            ContentReader = contentReader;
             Sections = sections;
         }
 
@@ -23,24 +22,36 @@ namespace SmartText.Builder
 
         public bool AutoLoadFile { get; set; }
 
-        public IContentReader ContentReader { get; set; }
+        public Func<IContentReader> ContentReaderFactory { get; set; }
 
+        private readonly Func<string, IContentReader> DefaultReaderFactory = (filePath) =>
+        {
+            if (filePath is null)
+            {
+                throw new ArgumentNullException(nameof(filePath));
+            }
+
+            return new FileContentReader(filePath);
+        };
 
         public static IConfigurationBuilder Create()
         {
             return new ConfigurationBuilder(
                 filePath: string.Empty,
                 autoLoadFile: false,
-                contentReader: new FileContentReader(),
                 new List<Section>());
         }
 
         public Configuration Build()
         {
+            var reader = ContentReaderFactory is null
+                ? DefaultReaderFactory(FilePath)
+                : ContentReaderFactory();
+
             return new Configuration
             {
                 AutoLoadFile = AutoLoadFile,
-                ContentReader = ContentReader,
+                ContentReader = reader,
                 FilePath = FilePath,
                 Sections = Sections
             };

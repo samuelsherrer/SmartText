@@ -49,8 +49,8 @@ namespace SmartText.Implementation
 
                 return true;
             }
-            catch (Exception ex) // TODO: Remover the exception variable
-            {   
+            catch
+            {
                 result = default;
                 return false;
             }

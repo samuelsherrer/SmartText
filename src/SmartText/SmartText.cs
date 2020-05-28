@@ -31,12 +31,12 @@ namespace SmartText
 
         public void LoadContent()
         {
-            _data = _contentReader.ReadAllLines(Configuration.FilePath);
+            _data = _contentReader.ReadAllLines();
         }
 
         public async Task LoadContentAsync()
         {
-            _data = await _contentReader.ReadAllLinesAsync(Configuration.FilePath);
+            _data = await _contentReader.ReadAllLinesAsync();
         }
 
         public ISectionReader<TSection> Reader<TSection>(Func<string, bool> lineReadingCondition) where TSection : class, new()
