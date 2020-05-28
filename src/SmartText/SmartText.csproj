@@ -2,6 +2,22 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <PackageProjectUrl>https://github.com/SamuelSlf/SmartText</PackageProjectUrl>
+    <PackageIcon>smarttext.png</PackageIcon>
+    <PackageIconUrl />
+    <RepositoryUrl>https://github.com/SamuelSlf/SmartText</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <NeutralLanguage>en-US</NeutralLanguage>
+    <Authors>Samuel, Fabiano, Geovane</Authors>
+    <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
   </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="C:\Users\samuel.TODOS\Desktop\smarttext.png">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
+  </ItemGroup>
 
 </Project>
